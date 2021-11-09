@@ -1,0 +1,3 @@
+(:name "pipenv"
+       :type github
+       :pkgname "pwalsh/pipenv.el")
