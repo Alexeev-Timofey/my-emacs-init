@@ -49,6 +49,7 @@
 	     'company-mode
 	     'company-flx
 	     'company-quickhelp
+	     'company-jedi
 	     'projectile
 	     'helm
 	     'helm-tramp
@@ -61,6 +62,8 @@
 	     'lsp-ui
 	     'lsp-treemacs
 	     ;; 'comment-edit ;; s/&;/&\;/ and add :type to all defcustom
+	     'dockerfile-mode
+	     'yaml-mode
 	     )
    #+end_src
 ** TODO Check system packages
@@ -163,7 +166,21 @@
     ;; (lsp)
     ;; (lsp-ui-mode)
     (setq lsp-auto-guess-root t)
-    (setq lsp-pylsp-plugins-jedi-completion-fuzzy t)
+    ;; (setq lsp-pylsp-plugins-jedi-completion-enabled t)
+    ;; (setq lsp-pylsp-plugins-jedi-definition-enabled t)
+    ;; (setq lsp-pylsp-plugins-jedi-references-enabled t)
+    ;; (setq lsp-pylsp-plugins-jedi-signature-help-enabled t)
+    ;; (setq lsp-pylsp-plugins-jedi-symbols-enabled t)
+    ;; (setq lsp-pylsp-plugins-jedi-completion-fuzzy t)
+    ;; (setq lsp-pylsp-plugins-mccabe-enabled nil)
+    ;; (setq lsp-pylsp-plugins-flake8-enabled nil)
+    ;; (setq lsp-pylsp-plugins-autopep8-enabled nil)
+    ;; (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
+    ;; (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
+    ;; (setq lsp-pylsp-plugins-pyflakes-enabled nil)
+    ;; (setq lsp-pylsp-plugins-yapf-enabled nil)
+    ;; (setq lsp-pylsp-plugins-pylint-enabled nil)
+    ;; (setq lsp-pylsp-plugins-rope-completion-enabled nil)
   #+end_src
 * Emacs Lisp
 #+begin_src emacs-lisp
@@ -190,7 +207,7 @@
 	  (set-buffer virtualenv-dir-buffer-name)
 	  (let ((begin-first-line (progn (beginning-of-buffer) (point)))
 		(end-first-line (progn (end-of-line) (point))))
-	    (setq lsp-pylsp-plugins-jedi-environment
+	    (setq-local lsp-pylsp-plugins-jedi-environment
 		  (buffer-substring-no-properties begin-first-line end-first-line)
 		  )
 	    )
@@ -199,8 +216,29 @@
 	(kill-buffer virtualenv-dir-buffer-name)
 	)
       (company-mode)
+      (setq-local company-backends
+	    '(company-bbdb company-semantic company-files
+	      (company-dabbrev-code company-keywords)
+	      company-oddmuse company-dabbrev
+	      company-jedi)
+	    )
       (flycheck-mode)
-      (lsp)
+      (lsp-deferred)
+      (setq-local lsp-pylsp-plugins-jedi-completion-enabled t)
+      (setq-local lsp-pylsp-plugins-jedi-definition-enabled t)
+      (setq-local lsp-pylsp-plugins-jedi-references-enabled t)
+      (setq-local lsp-pylsp-plugins-jedi-signature-help-enabled t)
+      (setq-local lsp-pylsp-plugins-jedi-symbols-enabled t)
+      (setq-local lsp-pylsp-plugins-jedi-completion-fuzzy t)
+      (setq-local lsp-pylsp-plugins-mccabe-enabled nil)
+      (setq-local lsp-pylsp-plugins-flake8-enabled nil)
+      (setq-local lsp-pylsp-plugins-autopep8-enabled nil)
+      (setq-local lsp-pylsp-plugins-pycodestyle-enabled nil)
+      (setq-local lsp-pylsp-plugins-pydocstyle-enabled nil)
+      (setq-local lsp-pylsp-plugins-pyflakes-enabled nil)
+      (setq-local lsp-pylsp-plugins-yapf-enabled nil)
+      (setq-local lsp-pylsp-plugins-pylint-enabled nil)
+      (setq-local lsp-pylsp-plugins-rope-completion-enabled nil)
       )
     (add-hook 'python-mode-hook
 	      #'my-python-hook
