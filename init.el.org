@@ -71,7 +71,7 @@
 *** TODO python-virtualenv
 *** TODO python-pipenv
 *** TODO pyenv
-*** TODO python-language-server (arch) / pip install "python-lsp-server[all]" (ubuntu)
+*** TODO python-language-server (arch) / snap install pylsp (ubuntu)
 *** TODO ripgrep
 *** TODO fd (find alternative)
 *** TODO rustc, rls, rust-analysis, rust-src
