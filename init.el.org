@@ -51,13 +51,12 @@
 	     'company-quickhelp
 	     'company-jedi
 	     'projectile
-	     ;; 'helm
+	     'helm
 	     ;; 'helm-tramp
 	     ;; 'helm-descbinds
-	     ;; 'helm-projectile
+	     'helm-projectile
 	     'flycheck
 	     'treemacs
-	     'treemacs-projectile
 	     'lsp-mode
 	     'lsp-ui
 	     'lsp-treemacs
@@ -117,7 +116,7 @@
      (helm-descbinds-mode)
    #+end_src
 
-* COMMENT Debug
+* Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
 #+end_src
@@ -137,7 +136,7 @@
 #+begin_src emacs-lisp
 (set 'ediff-split-window-function 'split-window-horizontally)
 #+end_src
-* COMMENT Helm
+* Helm
 ** Set compleating handlers
 #+begin_src emacs-lisp
 (setq helm-completing-read-handlers-alist
@@ -194,6 +193,7 @@
   (defun my-elisp-settings ()
     (company-mode)
     (flycheck-mode)
+    (lsp)
   )
   (add-hook
     'emacs-lisp-mode-hook
