@@ -1,32 +1,41 @@
+* Debug
+#+begin_src emacs-lisp
+  (setq debug-on-error t)
+#+end_src
 * Install and setup el-get
-** Setup el-get
+*** Setup MELPA repository
+#+begin_src emacs-lisp
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+#+end_src
 *** Setup load path
-    #+begin_src emacs-lisp
-      (defvar el-get-root)
-      (set 'el-get-root (concat (file-name-as-directory user-emacs-directory) "el-get"))
-      (add-to-list 'load-path (concat (file-name-as-directory el-get-root) "el-get"))
-      (add-to-list 'load-path (file-name-as-directory el-get-root))
-    #+end_src
+#+begin_src emacs-lisp
+  (defvar el-get-root)
+  (set 'el-get-root (concat (file-name-as-directory user-emacs-directory) "el-get"))
+  (add-to-list 'load-path (concat (file-name-as-directory el-get-root) "el-get"))
+  (add-to-list 'load-path (file-name-as-directory el-get-root))
+#+end_src
+*** TODO Setup el-get reinstall hook (update elpa/melpa recipes)
 *** Install el-get if needed
-    #+begin_src emacs-lisp
-      (unless (require 'el-get nil t)
-        (url-retrieve
-         "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-         (lambda (s)
-           (end-of-buffer)
-           (eval-print-last-sexp))))
-    #+end_src
-*** Setup recipes path
-    #+begin_src emacs-lisp
-      (defvar my-recipe-path)
-      (setq my-recipe-path
-	    (file-name-as-directory (concat (file-name-as-directory user-emacs-directory)
-					    "el-get-user/recipes")))
-      (add-to-list 'el-get-recipe-path my-recipe-path)
-    #+end_src
+#+begin_src emacs-lisp
+  (unless (require 'el-get nil t)
+    (url-retrieve
+     "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+     (lambda (s)
+       (end-of-buffer)
+       (eval-print-last-sexp))))
+  ;; TODO Need restart?
+#+end_src
+*** COMMENT Setup recipes path
+#+begin_src emacs-lisp
+  (defvar my-recipe-path)
+  (setq my-recipe-path
+	(file-name-as-directory (concat (file-name-as-directory user-emacs-directory)
+					"el-get-user/recipes")))
+  (add-to-list 'el-get-recipe-path my-recipe-path)
+#+end_src
 
-* TODO Load packages and check system packages
-** TODO Check external recipes
+* Load packages and check system packages
+** COMMENT Check external recipes
    #+begin_src emacs-lisp
      (defun check-recipe (recipe-name)
        "Check recipe with given name exists in recipe directory"
@@ -35,37 +44,64 @@
 	 )
        )
      (unless (seq-every-p #'check-recipe '(
-					   "cyberpunk-theme"
-					   "pipenv"
+					   ;; TODO
 					   ))
        (error "Some external recipe not exist"))
    #+end_src
+
 ** Load packages
-   #+begin_src emacs-lisp
-     (el-get 'sync
-	     'cyberpunk-theme
-	     'rust-mode
-	     'go-mode
-	     'company-mode
-	     'company-flx
-	     'company-quickhelp
-	     'company-jedi
-	     'projectile
-	     'helm
-	     ;; 'helm-tramp
-	     ;; 'helm-descbinds
-	     'helm-projectile
-	     'flycheck
-	     'treemacs
-	     'lsp-mode
-	     'lsp-ui
-	     'lsp-treemacs
-	     ;; 'comment-edit ;; s/&;/&\;/ and add :type to all defcustom
-	     'dockerfile-mode
-	     'yaml-mode
-	     'robot-mode
-	     )
-   #+end_src
+*** cyberpunk-theme
+#+begin_src emacs-lisp
+  (el-get-bundle cyberpunk-theme
+    (add-to-list 'custom-theme-load-path (concat (file-name-as-directory el-get-root) "cyberpunk-theme"))
+    (set 'custom-safe-themes t)
+    (load-theme 'cyberpunk)
+    )
+#+end_src
+*** helm
+#+begin_src emacs-lisp
+  (el-get-bundle helm
+    (delq 'execute-extended-command 'helm-completing-read-handlers-alist)
+    (delq 'find-file 'helm-completing-read-handlers-alist)
+
+    (global-unset-key (kbd C-x c C-x C-f))
+    (global-unset-key (kbd C-x c M-x))
+    )
+#+end_src
+*** TODO projectile
+*** TODO helm-projectile
+*** TODO helm-tramp
+*** TODO helm-descbinds
+*** company-mode
+#+begin_src emacs-lisp
+  (el-get-bundle company-mode)
+#+end_src
+*** TODO company-flx
+*** TODO company-quickhelp
+*** TODO company-jedi
+*** flycheck
+#+begin_src emacs-lisp
+  (el-get-bundle flycheck)
+#+end_src
+*** TODO treemacs
+*** lsp-mode
+#+begin_src emacs-lisp
+  (el-get-bundle lsp-mode)
+#+end_src
+*** TODO lsp-ui
+*** TODO lsp-treemacs
+*** yaml-mode
+#+begin_src emacs-lisp
+  (el-get-bundle yamp-mode)
+#+end_src
+*** TODO markdown-mode
+*** TODO robot-mode
+*** TODO rust-mode
+*** TODO go-mode
+*** el-get 'sync
+#+begin_src emacs-lisp
+  (el-get 'sync)
+#+end_src
 ** TODO Check system packages
 *** TODO make
 *** TODO python-virtualenv
@@ -77,12 +113,6 @@
 *** TODO rustc, rls, rust-analysis, rust-src
 *** TODO gopls
 *** TODO pip install robotframework --user
-* Setup color theme
-  #+begin_src emacs-lisp
-    (add-to-list 'custom-theme-load-path (concat (file-name-as-directory el-get-root) "cyberpunk-theme"))
-    (set 'custom-safe-themes t)
-    (load-theme 'cyberpunk)
-  #+end_src
 * Misc
 ** Disable startup screen
    #+begin_src emacs-lisp
@@ -115,11 +145,6 @@
    #+begin_src emacs-lisp
      (helm-descbinds-mode)
    #+end_src
-
-* Debug
-#+begin_src emacs-lisp
-  (setq debug-on-error t)
-#+end_src
 * Info mode
 ** Setup info directorys
 #+begin_src emacs-lisp
@@ -136,58 +161,6 @@
 #+begin_src emacs-lisp
 (set 'ediff-split-window-function 'split-window-horizontally)
 #+end_src
-* Helm
-** Set compleating handlers
-#+begin_src emacs-lisp
-(setq helm-completing-read-handlers-alist
-'((find-tag . helm-completing-read-default-find-tag)
- (xref-find-definitions . helm-completing-read-default-find-tag)
- (xref-find-references . helm-completing-read-default-find-tag)
- (ggtags-find-tag-dwim . helm-completing-read-default-find-tag)
- (tmm-menubar)
- (execute-extended-command)
- (dired-do-rename . helm-read-file-name-handler-1)
- (dired-do-copy . helm-read-file-name-handler-1)
- (dired-do-symlink . helm-read-file-name-handler-1)
- (dired-do-relsymlink . helm-read-file-name-handler-1)
- (dired-do-hardlink . helm-read-file-name-handler-1)
- (basic-save-buffer . helm-read-file-name-handler-1)
- (write-file . helm-read-file-name-handler-1)
- (write-region . helm-read-file-name-handler-1)))
-#+end_src
-* Projectile
-  #+begin_src emacs-lisp
-    (projectile-mode)
-  #+end_src
-** Setup project detection
-   #+begin_src emacs-lisp
-     (setq projectile-auto-discover nil)
-   #+end_src
-** Setup key binds
-   #+begin_src emacs-lisp
-     (define-key projectile-mode-map (kbd "C-x p") 'projectile-command-map)
-   #+end_src
-* LSP
-  #+begin_src emacs-lisp
-    ;; (lsp)
-    ;; (lsp-ui-mode)
-    (setq lsp-auto-guess-root t)
-    ;; (setq lsp-pylsp-plugins-jedi-completion-enabled t)
-    ;; (setq lsp-pylsp-plugins-jedi-definition-enabled t)
-    ;; (setq lsp-pylsp-plugins-jedi-references-enabled t)
-    ;; (setq lsp-pylsp-plugins-jedi-signature-help-enabled t)
-    ;; (setq lsp-pylsp-plugins-jedi-symbols-enabled t)
-    ;; (setq lsp-pylsp-plugins-jedi-completion-fuzzy t)
-    ;; (setq lsp-pylsp-plugins-mccabe-enabled nil)
-    ;; (setq lsp-pylsp-plugins-flake8-enabled nil)
-    ;; (setq lsp-pylsp-plugins-autopep8-enabled nil)
-    ;; (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
-    ;; (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
-    ;; (setq lsp-pylsp-plugins-pyflakes-enabled nil)
-    ;; (setq lsp-pylsp-plugins-yapf-enabled nil)
-    ;; (setq lsp-pylsp-plugins-pylint-enabled nil)
-    ;; (setq lsp-pylsp-plugins-rope-completion-enabled nil)
-  #+end_src
 * Emacs Lisp
 #+begin_src emacs-lisp
   (defun my-elisp-settings ()
@@ -200,82 +173,10 @@
     'my-elisp-settings
   )
 #+end_src
-
 * TODO Python
-** TODO Check python packages in virtualenv
-*** TODO python-language-server
-** TODO Setup hook
-  #+begin_src emacs-lisp
-    (defun my-python-hook ()
-      (let* ((virtualenv-dir-buffer-name (generate-new-buffer-name "virtualenv-dir"))
-	     (saved-current-buffer-name (current-buffer))
-	     (pipenv-ret-code (call-process "pipenv" nil virtualenv-dir-buffer-name nil "--venv")))
-	(unless (and (equal pipenv-ret-code "1") (looking-at-p "No virtualenv has been created for this project(.*) yet!"))
-	  (set-buffer virtualenv-dir-buffer-name)
-	  (let ((begin-first-line (progn (beginning-of-buffer) (point)))
-		(end-first-line (progn (end-of-line) (point))))
-	    (setq-local lsp-pylsp-plugins-jedi-environment
-		  (buffer-substring-no-properties begin-first-line end-first-line)
-		  )
-	    )
-	  (set-buffer saved-current-buffer-name)
-	  )
-	(kill-buffer virtualenv-dir-buffer-name)
-	)
-      (company-mode)
-      (setq-local company-backends
-	    '(company-bbdb company-semantic company-files
-	      (company-dabbrev-code company-keywords)
-	      company-oddmuse company-dabbrev
-	      company-jedi)
-	    )
-      (flycheck-mode)
-      (lsp-deferred)
-      (setq-local lsp-pylsp-plugins-jedi-completion-enabled t)
-      (setq-local lsp-pylsp-plugins-jedi-definition-enabled t)
-      (setq-local lsp-pylsp-plugins-jedi-references-enabled t)
-      (setq-local lsp-pylsp-plugins-jedi-signature-help-enabled t)
-      (setq-local lsp-pylsp-plugins-jedi-symbols-enabled t)
-      (setq-local lsp-pylsp-plugins-jedi-completion-fuzzy t)
-      (setq-local lsp-pylsp-plugins-mccabe-enabled nil)
-      (setq-local lsp-pylsp-plugins-flake8-enabled nil)
-      (setq-local lsp-pylsp-plugins-autopep8-enabled nil)
-      (setq-local lsp-pylsp-plugins-pycodestyle-enabled nil)
-      (setq-local lsp-pylsp-plugins-pydocstyle-enabled nil)
-      (setq-local lsp-pylsp-plugins-pyflakes-enabled nil)
-      (setq-local lsp-pylsp-plugins-yapf-enabled nil)
-      (setq-local lsp-pylsp-plugins-pylint-enabled nil)
-      (setq-local lsp-pylsp-plugins-rope-completion-enabled nil)
-      )
-    (add-hook 'python-mode-hook
-	      #'my-python-hook
-    )
-  #+end_src
-* TODO Robot Framework
+* TODO Robot
 * TODO Rust
-#+begin_src emacs-lisp
-  (setq lsp-rust-clippy-preference "on")
-  (setq lsp-rust-jobs 8)
-  (defun my-rust-hook ()
-    (company-mode)
-    (flycheck-mode)
-    (lsp)
-    )
-  (add-hook 'rust-mode-hook
-	    #'my-rust-hook
-	    )
-#+end_src
-* TODO Go Lang
-  #+begin_src emacs-lisp
-    (defun my-go-hook ()
-      (company-mode)
-      (flycheck-mode)
-      (lsp)
-      )
-    (add-hook 'go-mode-hook
-	      #'my-go-hook
-	      )
-  #+end_src
+* TODO Go
 * Setup startup hook
 ** Start terminal
 #+begin_src emacs-lisp
