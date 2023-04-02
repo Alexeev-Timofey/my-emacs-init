@@ -1,3 +1,10 @@
+* ToDo list
+** First Start
+** Python and RobotFramework
+** Tools for search and project managment
+** Auto install dependencies
+** Tolls for VCS managment
+** Other languages
 * Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
