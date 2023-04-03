@@ -2,6 +2,7 @@
 ** First Start
 ** Python and RobotFramework
 ** Tools for search and project managment
+** Features list
 ** Auto install dependencies
 ** Tolls for VCS managment
 ** Other languages
@@ -14,7 +15,7 @@
 #+begin_src emacs-lisp
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 #+end_src
-*** Setup load path
+*** COMMENT Setup load path
 #+begin_src emacs-lisp
   (defvar el-get-root)
   (set 'el-get-root (concat (file-name-as-directory user-emacs-directory) "el-get"))
