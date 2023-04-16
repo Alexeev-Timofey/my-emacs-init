@@ -1,5 +1,6 @@
 * ToDo list
 ** First Start
+** Function and variables
 ** Python and RobotFramework
 ** Tools for search and project managment
 ** DONE Features list
@@ -7,14 +8,26 @@
 ** Tolls for VCS managment
 ** Natural Language Spelling
 ** Other languages
-* Debug
+** Modify startup terminal launch
+* Variables
+** Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
+#+end_src
+* Functions
+** COMMENT Convert nil value to empty string
+#+begin_src emacs-lisp
+  (defun string-nil-guard (input-string)
+    "If value is nil, return \"\", else return argument \"input-string\""
+    (if (eval input-string)
+	(eval input-string)
+      (eval ""))
+    )
 #+end_src
 * Install and setup el-get
 ** TODO Install requred system packages
 *** TODO Install function
-*** TODO make
+*** TODO make TODO выяснить для какого пакета надо
 ** Setup MELPA repository
 #+begin_src emacs-lisp
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -74,14 +87,17 @@
    #+begin_src emacs-lisp
      (set 'ring-bell-function 'ignore)
    #+end_src
-** TODO Info mode
+** Info mode
 *** Setup info directorys
 #+begin_src emacs-lisp
-  (set 'Info-directory-list '("/home/timoha/.emacs.d/el-get/haskell-mode"
-			      "/home/timoha/.emacs.d/el-get/el-get/"
-			      "/usr/share/info/"
-			      "/usr/share/info/emacs"))
-  ;; TODO el-get info directory
+  ;; Add additional directories to INFOPATH environment variables
+  (let* ((info-dir-list '((getenv "INFOPATH")
+			  (file-name-concat el-get-dir "el-get")
+			  ;; Когда нибудь haskell-mode
+			  "" ;; В конце INFOPATH должен быть разделитель, чтобы добавились дефолтныее пути
+			  )))
+    (setenv "INFOPATH" (mapconcat 'eval info-dir-list path-separator))
+    )
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
@@ -164,8 +180,17 @@ TODO install needed system packages
 #+end_src
 ** TODO Robot Framework
 ** TODO Rust
-** TODO Setup startup hook
+** Setup startup hook
 *** TODO Start terminal
+#+begin_src emacs-lisp
+  ;; TODO Сделать так, чтобы стартовало только при обычном запуске, а при запуске от гита и открытии файла открывался соответствующий буфер
+  (defun my-startup-hook ()
+    (term "/bin/bash")
+    (rename-buffer "bash-shell")
+    )
+  (add-hook 'emacs-startup-hook
+	    #'my-startup-hook)
+#+end_src
 * el-get sync
 #+begin_src emacs-lisp
   (el-get 'sync)
