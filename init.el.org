@@ -91,11 +91,10 @@
 *** Setup info directorys
 #+begin_src emacs-lisp
   ;; Add additional directories to INFOPATH environment variables
-  (let* ((info-dir-list '((getenv "INFOPATH")
-			  (file-name-concat el-get-dir "el-get")
-			  ;; Когда нибудь haskell-mode
-			  "" ;; В конце INFOPATH должен быть разделитель, чтобы добавились дефолтныее пути
-			  )))
+  (let ((info-dir-list (seq-filter 'eval (parse-colon-path (getenv "INFOPATH")))))
+    (add-to-list 'info-dir-list (file-name-concat el-get-dir "el-get"))
+    ;; Когда нибудь haskell-mode
+    (add-to-list 'info-dir-list "" t)
     (setenv "INFOPATH" (mapconcat 'eval info-dir-list path-separator))
     )
 #+end_src
