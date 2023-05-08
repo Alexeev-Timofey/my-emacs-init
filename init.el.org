@@ -32,7 +32,7 @@
 #+begin_src emacs-lisp
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 #+end_src
-** COMMENT Setup load path
+** Setup load path
 #+begin_src emacs-lisp
   (defvar el-get-root)
   (set 'el-get-root (concat (file-name-as-directory user-emacs-directory) "el-get"))
@@ -117,12 +117,13 @@
 #+end_src
 ** Helm
 #+begin_src emacs-lisp
+  ;; TODO require 'make' sytem package
   (el-get-bundle helm
-    (delq 'execute-extended-command 'helm-completing-read-handlers-alist)
-    (delq 'find-file 'helm-completing-read-handlers-alist)
+    (delq 'execute-extended-command helm-completing-read-handlers-alist)
+    (delq 'find-file helm-completing-read-handlers-alist)
 
-    (global-unset-key (kbd C-x c C-x C-f))
-    (global-unset-key (kbd C-x c M-x))
+    (global-unset-key (kbd "C-x c C-x C-f"))
+    (global-unset-key (kbd "C-x c M-x"))
     )
 #+end_src
 ** TODO Helm search
@@ -144,9 +145,10 @@
 #+end_src
 ** YAML
 #+begin_src emacs-lisp
-  (el-get-bundle yamp-mode)
+  (el-get-bundle yaml-mode)
 #+end_src
 ** TODO Markdown
+** TODO sed script
 ** TODO Emacs Lisp
 ** TODO Python
 TODO install needed system packages
