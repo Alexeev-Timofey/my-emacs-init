@@ -119,8 +119,8 @@
 #+begin_src emacs-lisp
   ;; TODO require 'make' sytem package
   (el-get-bundle helm
-    (delq 'execute-extended-command helm-completing-read-handlers-alist)
-    (delq 'find-file helm-completing-read-handlers-alist)
+    (setq helm-completing-read-handlers-alist (remove '(execute-extended-command) helm-completing-read-handlers-alist))
+    (setq helm-completing-read-handlers-alist (remove '(find-file) helm-completing-read-handlers-alist))
 
     (global-unset-key (kbd "C-x c C-x C-f"))
     (global-unset-key (kbd "C-x c M-x"))
