@@ -28,40 +28,6 @@
     )
 #+end_src
 ** TODO Function for check and install required system packages
-* COMMENT Install and setup el-get
-** TODO Install requred system packages
-*** TODO Install function
-*** TODO make TODO выяснить для какого пакета надо
-** Setup MELPA repository
-#+begin_src emacs-lisp
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-#+end_src
-** Setup load path
-#+begin_src emacs-lisp
-  (defvar el-get-root)
-  (set 'el-get-root (concat (file-name-as-directory user-emacs-directory) "el-get"))
-  (add-to-list 'load-path (concat (file-name-as-directory el-get-root) "el-get"))
-  (add-to-list 'load-path (file-name-as-directory el-get-root))
-#+end_src
-** TODO Setup el-get reinstall hook (update elpa/melpa recipes)
-** Install el-get if needed
-#+begin_src emacs-lisp
-  (unless (require 'el-get nil t)
-    (url-retrieve
-     "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-     (lambda (s)
-       (end-of-buffer)
-       (eval-print-last-sexp))))
-  ;; TODO Need restart?
-#+end_src
-** COMMENT Setup recipes path
-#+begin_src emacs-lisp
-  (defvar my-recipe-path)
-  (setq my-recipe-path
-	(file-name-as-directory (concat (file-name-as-directory user-emacs-directory)
-					"el-get-user/recipes")))
-  (add-to-list 'el-get-recipe-path my-recipe-path)
-#+end_src
 * Install use-package
 ** (require 'package)
 #+begin_src emacs-lisp
@@ -71,20 +37,14 @@
 #+begin_src emacs-lisp
   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 #+end_src
-** (package-initialize)
+** COMMENT (package-initialize)
 #+begin_src emacs-lisp
   (package-initialize)
 #+end_src
-** TODO Install use-package
+** Install use-package
 #+begin_src emacs-lisp
-  (eval-when-compile
-    ;; Following line is not needed if use-package.el is in ~/.emacs.d
-    (add-to-list 'load-path "<path where use-package is installed>")
-    (require 'use-package))
-#+end_src
-** (setq use-package-always-ensure t)
-#+begin_src emacs-lisp
-  (setq use-package-always-ensure t)
+  (package-install 'use-package t)
+  (require 'use-package)
 #+end_src
 * Features
 ** Misk
@@ -120,7 +80,7 @@
 #+begin_src emacs-lisp
   ;; Add additional directories to INFOPATH environment variables
   (let ((info-dir-list (seq-filter 'eval (parse-colon-path (getenv "INFOPATH")))))
-    (add-to-list 'info-dir-list (file-name-concat el-get-dir "el-get"))
+    ;; (add-to-list 'info-dir-list (file-name-concat el-get-dir "el-get"))
     ;; Когда нибудь haskell-mode
     (add-to-list 'info-dir-list "" t)
     (setenv "INFOPATH" (mapconcat 'eval info-dir-list path-separator))
@@ -134,8 +94,8 @@
 #+begin_src emacs-lisp
   (set 'ediff-split-window-function 'split-window-horizontally)
 #+end_src
-** Color Theme
-*** TODO cyberpunk-theme
+** TODO Color Theme
+*** cyberpunk-theme
 #+begin_src emacs-lisp
   ;; (el-get-bundle cyberpunk-theme
   ;;   (add-to-list 'custom-theme-load-path (concat (file-name-as-directory el-get-root) "cyberpunk-theme"))
@@ -143,28 +103,33 @@
   ;;   (load-theme 'cyberpunk)
   ;;   )
   (use-package cyberpunk-theme
-	       :config 
+	       :config (load-theme 'cyberpunk t nil)
+	       :ensure t
 	       )
 #+end_src
 ** Helm
 #+begin_src emacs-lisp
   ;; TODO require 'make' sytem package
-  (el-get-bundle helm
+  (use-package helm
+    :config
+    (helm-mode)
     (setq helm-completing-read-handlers-alist (remove '(execute-extended-command) helm-completing-read-handlers-alist))
     (setq helm-completing-read-handlers-alist (remove '(find-file) helm-completing-read-handlers-alist))
-
     (global-unset-key (kbd "C-x c C-x C-f"))
     (global-unset-key (kbd "C-x c M-x"))
+    :ensure t
     )
 #+end_src
 ** TODO Helm search
 ** Company
 #+begin_src emacs-lisp
-  (el-get-bundle company-mode)
+  (use-package company
+	       :ensure t)
 #+end_src
 ** Flycheck
 #+begin_src emacs-lisp
-  (el-get-bundle flycheck)
+  (use-package flycheck
+	       :ensure t)
 #+end_src
 ** TODO Projectile
 ** TODO Treemacs
@@ -172,11 +137,13 @@
 ** TODO Natural Language Spelling
 ** LSP
 #+begin_src emacs-lisp
-  (el-get-bundle lsp-mode)
+  (use-package lsp-mode
+	       :ensure t)
 #+end_src
 ** YAML
 #+begin_src emacs-lisp
-  (el-get-bundle yaml-mode)
+  (use-package yaml-mode
+	       :ensure t)
 #+end_src
 ** TODO Markdown
 ** TODO sed script
@@ -211,19 +178,23 @@ TODO install needed system packages
 	    )
 #+end_src
 ** TODO Robot Framework
+#+begin_src emacs-lisp
+  (use-package robot-mode
+    :ensure t)
+#+end_src
 ** TODO Rust
 TODO install rust packages
 #+begin_src emacs-lisp
-  (el-get-bundle rust-mode
-    (defun my-rust-hook ()
-      (setq lsp-rust-server rust-analyzer)
-      (lsp)
-      )
-
-    (add-hook 'rust-mode-hook
-	      #'my-rust-hook
-	      )
+  (use-package rust-mode
+    :ensure t)
+  (defun my-rust-hook ()
+    (setq lsp-rust-server rust-analyzer)
+    (lsp)
     )
+
+  (add-hook 'rust-mode-hook
+	    #'my-rust-hook
+	    )
 
   ;; TODO Cargo.toml mode
 #+end_src
@@ -237,8 +208,4 @@ TODO install rust packages
     )
   (add-hook 'emacs-startup-hook
 	    #'my-startup-hook)
-#+end_src
-* COMMENT el-get sync
-#+begin_src emacs-lisp
-  (el-get 'sync)
 #+end_src
