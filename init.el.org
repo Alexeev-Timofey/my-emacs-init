@@ -1,19 +1,25 @@
 * ToDo list
 ** First Start
-** Function and variables
-** Python and RobotFramework
-** Tools for search and project managment
-** DONE Features list
-** Auto install dependencies
-** elgot vs lsp-mode
-** use-package vs el-get
+** TODO Tools for search and project managment
+** Auto install system dependencies
+** Emacs packages as system packages
+** elgot vs lsp-mode vs lsp-bridge
+** DONE use-package vs el-get
 ** Tolls for VCS managment
 ** Natural Language Spelling
-** Other languages
+** TODO Programming languages
+*** Elisp
+*** TODO Pyton
+**** Recognise project
+**** Setup environment
+**** Start lsp server
+*** Robotframework
 *** Rust
+** Debugging
+*** realgud
 ** Modify startup terminal launch
 * Variables
-** Debug
+** COMMENT Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
 #+end_src
@@ -94,14 +100,9 @@
 #+begin_src emacs-lisp
   (set 'ediff-split-window-function 'split-window-horizontally)
 #+end_src
-** TODO Color Theme
+** Color Theme
 *** cyberpunk-theme
 #+begin_src emacs-lisp
-  ;; (el-get-bundle cyberpunk-theme
-  ;;   (add-to-list 'custom-theme-load-path (concat (file-name-as-directory el-get-root) "cyberpunk-theme"))
-  ;;   (set 'custom-safe-themes t)
-  ;;   (load-theme 'cyberpunk)
-  ;;   )
   (use-package cyberpunk-theme
 	       :config (load-theme 'cyberpunk t nil)
 	       :ensure t
@@ -124,21 +125,35 @@
 ** Company
 #+begin_src emacs-lisp
   (use-package company
-	       :ensure t)
+    :ensure t)
 #+end_src
 ** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
-	       :ensure t)
+    :ensure t)
 #+end_src
-** TODO Projectile
+** Projectile
+#+begin_src emacs-lisp
+  (use-package projectile
+    :ensure t)
+#+end_src
 ** TODO Treemacs
 ** TODO Git
 ** TODO Natural Language Spelling
-** LSP
+** lsp-mode
 #+begin_src emacs-lisp
   (use-package lsp-mode
 	       :ensure t)
+#+end_src
+** lsp-bridge
+#+begin_src emacs-lisp
+  (use-package lsp-bridge
+    :ensure t)
+#+end_src
+** realgud
+#+begin_src emacs-lisp
+  (use-package realgud
+    :ensure t)
 #+end_src
 ** YAML
 #+begin_src emacs-lisp
@@ -149,8 +164,30 @@
 ** TODO sed script
 ** TODO Emacs Lisp
 ** TODO Python
+*** Project navigation
+rg, projectile, treemacs (something else?)
+*** Linting
+ruff | ruff-lsp | lsp-bridge
+*** Completition
+jedi | jedi-lsp | lsp-bridge
+*** Debugging
+ipdb | realgud
+*** Snippets
+yasnippet
+*** Documentation
+jedi | jedi-lsp | lsp-bridge
+*** Profiling
+py-prof
+*** eLisp code
 TODO install needed system packages
 #+begin_src emacs-lisp
+  (defun my-new-python-hook ()
+    (require 'lsp-bridge)
+    (require 'realgud)
+    (require 'projectile)
+    
+    )
+
   (defun my-python-hook ()
     (let* ((virtualenv-dir-buffer-name (generate-new-buffer-name "virtualenv-dir"))
 	   (saved-current-buffer-name (current-buffer))
