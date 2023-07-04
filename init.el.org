@@ -129,10 +129,22 @@
 ** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
-	       :ensure t)
+    :ensure t
+    )
 #+end_src
 ** TODO Projectile
-** TODO Treemacs
+** Treemacs
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :ensure t
+    )
+#+end_src
+** lsp-treemacs
+#+begin_src emacs-lisp
+  (use-package lsp-treemacs
+    :ensure t
+  )
+#+end_src
 ** TODO Git
 ** TODO Natural Language Spelling
 ** LSP
