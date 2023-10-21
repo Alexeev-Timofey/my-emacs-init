@@ -2,8 +2,9 @@
 ** First Start
 ** Function and variables
 ** Python and RobotFramework
+*** Поиск и настройка проекта
+**** На каждый venv дошлжен быть собственный lsp-server
 ** Tools for search and project managment
-** DONE Features list
 ** Auto install dependencies
 ** elgot vs lsp-mode
 ** use-package vs el-get
