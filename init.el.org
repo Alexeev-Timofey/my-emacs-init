@@ -4,7 +4,10 @@
 ** Auto install system dependencies
 ** Emacs packages as system packages
 ** elgot vs lsp-mode vs lsp-bridge
-** DONE use-package vs el-get
+** Function and variables
+** Python and RobotFramework
+*** Поиск и настройка проекта
+**** На каждый venv дошлжен быть собственный lsp-server
 ** Tolls for VCS managment
 ** Natural Language Spelling
 ** TODO Programming languages
@@ -34,7 +37,7 @@
     )
 #+end_src
 ** TODO Function for check and install required system packages
-* Install use-package
+* COMMENT Install use-package
 ** (require 'package)
 #+begin_src emacs-lisp
   (require 'package)
@@ -130,6 +133,7 @@
 ** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
+<<<<<<< HEAD
     :ensure t)
 #+end_src
 ** Projectile
@@ -138,6 +142,24 @@
     :ensure t)
 #+end_src
 ** TODO Treemacs
+=======
+    :ensure t
+    )
+#+end_src
+** TODO Projectile
+** Treemacs
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :ensure t
+    )
+#+end_src
+** lsp-treemacs
+#+begin_src emacs-lisp
+  (use-package lsp-treemacs
+    :ensure t
+  )
+#+end_src
+>>>>>>> rework
 ** TODO Git
 ** TODO Natural Language Spelling
 ** lsp-mode
