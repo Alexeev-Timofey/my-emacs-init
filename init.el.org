@@ -29,7 +29,7 @@
     )
 #+end_src
 ** TODO Function for check and install required system packages
-* Install use-package
+* COMMENT Install use-package
 ** (require 'package)
 #+begin_src emacs-lisp
   (require 'package)
