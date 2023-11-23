@@ -36,7 +36,7 @@
       (eval ""))
     )
 #+end_src
-** TODO Function for check and install required system packages
+** TODO Function for check and install required system packages.
 * COMMENT Install use-package
 ** (require 'package)
 #+begin_src emacs-lisp
@@ -133,7 +133,6 @@
 ** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
-<<<<<<< HEAD
     :ensure t)
 #+end_src
 ** Projectile
@@ -141,12 +140,6 @@
   (use-package projectile
     :ensure t)
 #+end_src
-** TODO Treemacs
-=======
-    :ensure t
-    )
-#+end_src
-** TODO Projectile
 ** Treemacs
 #+begin_src emacs-lisp
   (use-package treemacs
@@ -159,7 +152,6 @@
     :ensure t
   )
 #+end_src
->>>>>>> rework
 ** TODO Git
 ** TODO Natural Language Spelling
 ** lsp-mode
