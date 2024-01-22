@@ -1,4 +1,5 @@
 * ToDo list
+** TODO MELPA !!!
 ** First Start
 ** TODO Tools for search and project managment
 ** Auto install system dependencies
@@ -37,7 +38,7 @@
     )
 #+end_src
 ** TODO Function for check and install required system packages.
-* COMMENT Install use-package
+* Install use-package
 ** (require 'package)
 #+begin_src emacs-lisp
   (require 'package)
