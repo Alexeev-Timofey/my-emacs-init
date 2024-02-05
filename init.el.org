@@ -141,6 +141,11 @@
   (use-package projectile
     :ensure t)
 #+end_src
+** lsp-mode
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+	       :ensure t)
+#+end_src
 ** Treemacs
 #+begin_src emacs-lisp
   (use-package treemacs
@@ -155,17 +160,12 @@
 #+end_src
 ** TODO Git
 ** TODO Natural Language Spelling
-** lsp-mode
-#+begin_src emacs-lisp
-  (use-package lsp-mode
-	       :ensure t)
-#+end_src
-** lsp-bridge
+** COMMENT lsp-bridge
 #+begin_src emacs-lisp
   (use-package lsp-bridge
     :ensure t)
 #+end_src
-** realgud
+** COMMENT realgud
 #+begin_src emacs-lisp
   (use-package realgud
     :ensure t)
