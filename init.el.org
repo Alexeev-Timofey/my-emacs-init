@@ -124,13 +124,19 @@
     :ensure t
     )
 #+end_src
+** COMMENT Helm descbinds
+#+begin_src emacs-lisp
+  (use-package helm-descbinds
+    :config (helm-descbinds-mode)
+    :ensure t)
+#+end_src
 ** TODO Helm search
 ** Company
 #+begin_src emacs-lisp
   (use-package company
     :ensure t)
 #+end_src
-** Flycheck
+** COMMENT Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
     :ensure t)
@@ -207,6 +213,7 @@ TODO install needed system packages
     ;; (require 'realgud)
     ;; (require 'projectile)
 
+    (company-mode)
     (eglot-ensure)
 
     )
@@ -250,6 +257,7 @@ TODO install rust packages
   (defun my-rust-hook ()
     ;; (setq lsp-rust-server rust-analyzer)
     ;; (lsp)
+    (company-mode)
     (eglot-ensure)
     )
 
