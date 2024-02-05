@@ -119,8 +119,8 @@
     (helm-mode)
     (setq helm-completing-read-handlers-alist (remove '(execute-extended-command) helm-completing-read-handlers-alist))
     (setq helm-completing-read-handlers-alist (remove '(find-file) helm-completing-read-handlers-alist))
-    (global-unset-key (kbd "C-x c C-x C-f"))
-    (global-unset-key (kbd "C-x c M-x"))
+    (keymap-global-unset "C-x c C-x C-f")
+    (keymap-global-unset "C-x c M-x")
     :ensure t
     )
 #+end_src
@@ -173,9 +173,13 @@
 ** YAML
 #+begin_src emacs-lisp
   (use-package yaml-mode
-	       :ensure t)
+    :ensure t)
 #+end_src
-** TODO Markdown
+** Markdown
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t)
+#+end_src
 ** TODO sed script
 ** TODO Emacs Lisp
 ** TODO Python
@@ -193,6 +197,8 @@ yasnippet
 jedi | jedi-lsp | lsp-bridge
 *** Profiling
 py-prof
+*** Environment managment
+???
 *** eLisp code
 TODO install needed system packages
 #+begin_src emacs-lisp
@@ -201,7 +207,7 @@ TODO install needed system packages
     ;; (require 'realgud)
     ;; (require 'projectile)
 
-    (eglot)
+    (eglot-ensure)
 
     )
 
@@ -244,7 +250,7 @@ TODO install rust packages
   (defun my-rust-hook ()
     ;; (setq lsp-rust-server rust-analyzer)
     ;; (lsp)
-    (eglot)
+    (eglot-ensure)
     )
 
   (add-hook 'rust-mode-hook
