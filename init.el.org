@@ -204,7 +204,9 @@ jedi | jedi-lsp | lsp-bridge
 *** Profiling
 py-prof
 *** Environment managment
-???
+venv, pyenv, pipenv
+*** Dependensies
+pipenv, some python lsp server (pylsp)
 *** eLisp code
 TODO install needed system packages
 #+begin_src emacs-lisp
