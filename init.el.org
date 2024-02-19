@@ -133,10 +133,16 @@
 ** TODO Helm search
 ** TODO Function for loading project related emacs-lisp code
 #+begin_src emacs-lisp
-  ;; TODO Function for loading project related emacs-lisp code
-  ;; TODO define function
-  ;; TODO Search temacs_project.el
-  ;; TODO load temacs_projecct.el
+  (defconst default_temacs_project_file_name "TemacsProject.org")
+
+  (defun find_and_load_temacs_project_file (start_point_arg &optional temacs_project_file_name_arg)
+    (let
+	((temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
+      (start_point start_point_arg))
+      (locate-dominating-file start_point temacs_project_file_name)
+      ;; TODO load temacs_projecct.el
+      )
+    )
 #+end_src
 ** Company
 #+begin_src emacs-lisp
