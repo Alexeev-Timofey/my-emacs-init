@@ -136,11 +136,13 @@
   (defconst default_temacs_project_file_name "TemacsProject.org")
 
   (defun find_and_load_temacs_project_file (start_point_arg &optional temacs_project_file_name_arg)
-    (let
-	((temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
-      (start_point start_point_arg))
-      (locate-dominating-file start_point temacs_project_file_name)
-      ;; TODO load temacs_projecct.el
+    (let*
+	(
+	 (temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
+	 (start_point start_point_arg)
+	 (temacs_project_dir (locate-dominating-file start_point temacs_project_file_name))
+	 )
+      (org-babel-load-file (file-name-concat temacs_project_dir temacs_project_file_name))
       )
     )
 #+end_src
