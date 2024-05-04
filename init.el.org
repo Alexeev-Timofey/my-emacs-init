@@ -45,6 +45,7 @@
 ** Setup MELPA repository
 #+begin_src emacs-lisp
   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  (package-initialize)
 #+end_src
 ** COMMENT (package-initialize)
 #+begin_src emacs-lisp
