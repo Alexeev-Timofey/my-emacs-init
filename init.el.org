@@ -45,9 +45,8 @@
 ** Setup MELPA repository
 #+begin_src emacs-lisp
   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-  (package-initialize)
 #+end_src
-** COMMENT (package-initialize)
+** (package-initialize)
 #+begin_src emacs-lisp
   (package-initialize)
 #+end_src
@@ -85,6 +84,11 @@
    #+begin_src emacs-lisp
      (set 'ring-bell-function 'ignore)
    #+end_src
+*** Bash as default shell
+Я пока что не готов к переходу на zsh
+#+begin_src emacs-lisp
+  (setenv "ESHELL" "/bin/bash")
+#+end_src
 ** Info mode
 *** Setup info directorys
 #+begin_src emacs-lisp
@@ -296,8 +300,7 @@ TODO install rust packages
 #+begin_src emacs-lisp
   ;; TODO Сделать так, чтобы стартовало только при обычном запуске, а при запуске от гита и открытии файла открывался соответствующий буфер
   (defun my-startup-hook ()
-    (term "/bin/bash")
-    (rename-buffer "bash-shell")
+    (make-term "bash-shell" "/bin/bash")
     )
   (add-hook 'emacs-startup-hook
 	    #'my-startup-hook)
