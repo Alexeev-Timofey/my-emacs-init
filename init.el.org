@@ -300,7 +300,8 @@ TODO install rust packages
 #+begin_src emacs-lisp
   ;; TODO Сделать так, чтобы стартовало только при обычном запуске, а при запуске от гита и открытии файла открывался соответствующий буфер
   (defun my-startup-hook ()
-    (make-term "bash-shell" "/bin/bash")
+    (term "/bin/bash")
+    (rename-buffer "bash-shell")
     )
   (add-hook 'emacs-startup-hook
 	    #'my-startup-hook)
