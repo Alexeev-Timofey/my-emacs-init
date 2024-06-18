@@ -8,7 +8,9 @@
 ** Python and RobotFramework
 *** Поиск и настройка проекта
 **** На каждый venv дошлжен быть собственный lsp-server
-** Tolls for VCS managment
+** Tools for VCS managment
+*** magit and forge
+*** lab.el for gitlab
 ** Natural Language Spelling
 ** TODO Programming languages
 *** Elisp
@@ -57,10 +59,14 @@
 #+end_src
 * Features
 ** Misk
-*** Disable startup screen
-   #+begin_src emacs-lisp
-     (set 'inhibit-startup-screen 1)
-   #+end_src
+*** Setup initial buffer
+TODO Когда запускается вместе с именем файла, открывать только файл, шел не запускать
+#+begin_src emacs-lisp
+  (defun setup-initial-buffer ()
+    (make-term "bash-shell" "/bin/bash")
+    )
+  (set 'initial-buffer-choice #'setup-initial-buffer)
+#+end_src
 *** Disable useless bars
    #+begin_src emacs-lisp
      (scroll-bar-mode -1)
@@ -136,20 +142,43 @@
     :ensure t)
 #+end_src
 ** TODO Helm search
-** TODO Function for loading project related emacs-lisp code
+** TODO COMMENT Function for loading project related emacs-lisp code
 #+begin_src emacs-lisp
   (defconst default_temacs_project_file_name "TemacsProject.org")
 
-  (defun find_and_load_temacs_project_file (start_point_arg &optional temacs_project_file_name_arg)
+  (defun find_temacs_project_file (start_point_arg &optional temacs_project_file_name_arg)
     (let*
 	(
 	 (temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
 	 (start_point start_point_arg)
 	 (temacs_project_dir (locate-dominating-file start_point temacs_project_file_name))
 	 )
-      (org-babel-load-file (file-name-concat temacs_project_dir temacs_project_file_name))
+      ;; (org-babel-load-file (file-name-concat temacs_project_dir temacs_project_file_name))
+      
       )
     )
+
+  (defun load_temacs_project_file (temacs_project_file_path)
+    ;; TODO
+    )
+
+  ;; (defun find_and_load_temacs_project_file (start_point_arg &optional temacs_project_file_name_arg)
+  ;;   (let*
+  ;;       (
+  ;;        (temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
+  ;;        (start_point start_point_arg)
+  ;;        (temacs_project_dir (locate-dominating-file start_point temacs_project_file_name))
+  ;;        )
+  ;;     (org-babel-load-file (file-name-concat temacs_project_dir temacs_project_file_name))
+  ;;     )
+  ;;   )
+
+  ;; TODO Project init functions list
+  ;; '(
+  ;;   find_and_load_temacs_project_file
+  ;;   basel project
+  ;;   project.el
+  ;;  )
 #+end_src
 ** Company
 #+begin_src emacs-lisp
