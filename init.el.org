@@ -146,7 +146,7 @@ TODO Когда запускается вместе с именем файла, 
 #+begin_src emacs-lisp
   (defconst default_temacs_project_file_name "TemacsProject.org")
 
-  (defun find_temacs_project_file (start_point_arg &optional temacs_project_file_name_arg)
+  (defun find_temacs_project_dir (start_point_arg &optional temacs_project_file_name_arg)
     (let*
 	(
 	 (temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
@@ -154,8 +154,13 @@ TODO Когда запускается вместе с именем файла, 
 	 (temacs_project_dir (locate-dominating-file start_point temacs_project_file_name))
 	 )
       ;; (org-babel-load-file (file-name-concat temacs_project_dir temacs_project_file_name))
-      
+
       )
+    )
+
+  (defun find_temacs_project_file (project_dir &optional temacs_project_file_name_arg)
+    ;; TODO Найти project_file в директории
+    (file-name-concat project_dir temacs_project_file_name)
     )
 
   (defun load_temacs_project_file (temacs_project_file_path)
