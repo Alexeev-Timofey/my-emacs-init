@@ -62,10 +62,13 @@
 *** Setup initial buffer
 TODO Когда запускается вместе с именем файла, открывать только файл, шел не запускать
 #+begin_src emacs-lisp
-  (defun setup-initial-buffer ()
-    (make-term "bash-shell" "/bin/bash")
-    )
-  (set 'initial-buffer-choice #'setup-initial-buffer)
+    (defun setup-initial-buffer ()
+      (let ((ret (make-term "bash-shell" "/bin/bash")))
+	(progn (with-current-buffer ret (term-char-mode))
+	       ret)
+	)
+      )
+    (set 'initial-buffer-choice #'setup-initial-buffer)
 #+end_src
 *** Disable useless bars
    #+begin_src emacs-lisp
@@ -328,15 +331,4 @@ TODO install rust packages
 	    )
 
   ;; TODO Cargo.toml mode
-#+end_src
-** Setup startup hook
-*** TODO Start terminal
-#+begin_src emacs-lisp
-  ;; TODO Сделать так, чтобы стартовало только при обычном запуске, а при запуске от гита и открытии файла открывался соответствующий буфер
-  (defun my-startup-hook ()
-    (term "/bin/bash")
-    (rename-buffer "bash-shell")
-    )
-  (add-hook 'emacs-startup-hook
-	    #'my-startup-hook)
 #+end_src
