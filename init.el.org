@@ -24,7 +24,7 @@
 *** realgud
 ** Modify startup terminal launch
 * Variables
-** COMMENT Debug
+** Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
 #+end_src
@@ -158,6 +158,7 @@ TODO Когда запускается вместе с именем файла, 
 	 (temacs_project_file (file-name-concat temacs_project_dir temacs_project_file_name))
 	 )
       '(temacs_project_dir temacs_project_file)
+      )
     )
 
   (defun load_temacs_project_file (temacs_project_file_path)
