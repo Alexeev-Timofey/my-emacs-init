@@ -24,7 +24,7 @@
 *** realgud
 ** Modify startup terminal launch
 * Variables
-** Debug
+** COMMENT Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
 #+end_src
@@ -152,7 +152,7 @@ TODO Когда запускается вместе с именем файла, 
   (defun find_temacs_project_dir_and_file (start_point_arg &optional temacs_project_file_name_arg)
     (let*
 	(
-	 (temacs_project_file_name (or (temacs_project_file_name_arg) (default_temacs_project_file_name)))
+	 (temacs_project_file_name (or temacs_project_file_name_arg default_temacs_project_file_name))
 	 (start_point start_point_arg)
 	 (temacs_project_dir (locate-dominating-file start_point temacs_project_file_name))
 	 (temacs_project_file (file-name-concat temacs_project_dir temacs_project_file_name))
@@ -280,7 +280,7 @@ TODO install needed system packages
       ;; (require 'projectile)
 
       ;; Поиск настроек проекта
-      (let ((dir_and_file (find_temacs_project_dir_and_file)))
+      (let ((dir_and_file (find_temacs_project_dir_and_file (buffer-file-name))))
 	(progn
 	  (setq-local temacs_project_dir_path (pop dir_and_file))
 	  (setq-local temacs_project_file_path (pop dir_and_file))))
@@ -344,4 +344,9 @@ TODO install rust packages
 	    )
 
   ;; TODO Cargo.toml mode
+#+end_src
+* Debugging
+** COMMENT 1
+#+begin_src emacs-lisp
+  (debug-on-entry 'my-new-python-hook)	;
 #+end_src
