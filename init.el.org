@@ -93,10 +93,20 @@ TODO Когда запускается вместе с именем файла, 
    #+begin_src emacs-lisp
      (set 'ring-bell-function 'ignore)
    #+end_src
+** TODO Term mode settings
 *** Bash as default shell
 Я пока что не готов к переходу на zsh
 #+begin_src emacs-lisp
   (setenv "ESHELL" "/bin/bash")
+#+end_src
+*** Modify renaming term buffer (add '*' to name)
+#+begin_src emacs-lisp
+  (require 'term)
+  (defun rename-term-buffer (new-buffer-name) (interactive "sNew term buffer name: ")
+	 (rename-buffer (concat "*" new-buffer-name "*"))
+	 )
+
+  (keymap-set term-raw-map "C-c x r" 'rename-term-buffer)
 #+end_src
 ** Info mode
 *** Setup info directorys
