@@ -93,6 +93,10 @@ TODO Когда запускается вместе с именем файла, 
    #+begin_src emacs-lisp
      (set 'ring-bell-function 'ignore)
    #+end_src
+*** Disable num-5
+#+begin_src emacs-lisp
+  (keymap-global-unset  "<kp-begin>")
+#+end_src
 ** Term mode settings
 *** Bash as default shell
 Я пока что не готов к переходу на zsh
@@ -357,6 +361,11 @@ TODO install rust packages
 	    )
 
   ;; TODO Cargo.toml mode
+#+end_src
+** Raku
+#+begin_src emacs-lisp
+  (use-package raku-mode
+    :ensure t)
 #+end_src
 * Debugging
 ** COMMENT 1
