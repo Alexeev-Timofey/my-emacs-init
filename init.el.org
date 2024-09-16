@@ -97,6 +97,10 @@ TODO Когда запускается вместе с именем файла, 
 #+begin_src emacs-lisp
   (keymap-global-unset  "<kp-begin>")
 #+end_src
+** TODO COMMENT Project managment library
+*** TODO Compile projects files
+*** TODO Build project files queue
+*** TODO Open file callback function generator
 ** Term mode settings
 *** Bash as default shell
 Я пока что не готов к переходу на zsh
