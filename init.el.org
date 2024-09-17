@@ -102,16 +102,24 @@ TODO Когда запускается вместе с именем файла, 
 #+begin_src emacs-lisp
   (defconst predefined-projects-dir-name "projects")
 
-  (defun temacs-load-predefined-projects ()
-    ;; Go to predefined projects directory
-    (defvar predefined-projects-dir
-      (file-name-concat user-emacs-directory predefined-projects-dir-name)
-      )
-    (unless file-exists-p predefined-projects-dir
-      (make-directory predefined-projects-dir)
-      )
-    ()
+  (defun create-project-instance project-file-name
+    ;; TODO
     )
+
+  (defun temacs-load-predefined-projects ()
+    (defvar predefined-projects-dir
+      (file-name-concat user-emacs-directory predefined-projects-dir-name))
+    (unless file-exists-p predefined-projects-dir
+      (make-directory predefined-projects-dir))
+
+    (defvar predefined-projects
+      (iter-do 'project-file-name (directory-files predefined-projects-dir t ".*\.project" t)
+	       (create-project-instance project-file-name))))
+
+  (defun temacs-load-project project-path
+    ;; TODO
+    )
+
 #+end_src
 *** TODO Build project files queue
 *** TODO Open file callback function generator
