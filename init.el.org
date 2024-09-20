@@ -1,3 +1,4 @@
+
 * ToDo list
 ** First Start
 ** TODO Tools for search and project managment
@@ -123,6 +124,16 @@ TODO Когда запускается вместе с именем файла, 
 #+end_src
 *** TODO Build project files queue
 *** TODO Open file callback function generator
+** TODO COMMENT Project managment library (rework)
+#+begin_src emacs-lisp
+  (defun turn-on-project (project-path)
+    "TODO"
+    )
+
+  (defun turn-off-project (project-path)
+    "TODO"
+    )
+#+end_src
 ** Term mode settings
 *** Bash as default shell
 Я пока что не готов к переходу на zsh
@@ -397,6 +408,8 @@ TODO install rust packages
   (use-package raku-mode
     :ensure t)
 #+end_src
+* Projects
+** TODO Import file with projects
 * Debugging
 ** COMMENT 1
 #+begin_src emacs-lisp
