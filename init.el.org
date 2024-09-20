@@ -369,6 +369,10 @@ TODO install needed system packages
 #+begin_src emacs-lisp
   (use-package robot-mode
     :ensure t)
+
+  ;; TODO Robotframework language server dependency
+  ;; TODO Setup eglot for robotframework
+  ;; TODO Robotframework hook
 #+end_src
 ** TODO Rust
 TODO install rust packages
