@@ -1,11 +1,10 @@
-
 * ToDo list
 ** First Start
 ** TODO Tools for search and project managment
 ** Auto install system dependencies
 ** Emacs packages as system packages
 ** elgot vs lsp-mode vs lsp-bridge
-** Function and variables
+** DONE Function and variables
 ** Python and RobotFramework
 *** Поиск и настройка проекта
 **** На каждый venv дошлжен быть собственный lsp-server
@@ -23,7 +22,7 @@
 *** Rust
 ** Debugging
 *** realgud
-** Modify startup terminal launch
+** DONE Modify startup terminal launch
 * Variables
 ** COMMENT Debug
 #+begin_src emacs-lisp
@@ -133,6 +132,18 @@ TODO Когда запускается вместе с именем файла, 
   (defun turn-off-project (project-path)
     "TODO"
     )
+
+  (defun switch-project (project-path)
+    "TODO"
+    )
+
+  (defun open-project (project-path)
+    "TODO"
+    )
+
+  (defun find-file-with-project (project-path file-path)
+    "TODO"
+    )
 #+end_src
 ** Term mode settings
 *** Bash as default shell
@@ -178,7 +189,7 @@ TODO Когда запускается вместе с именем файла, 
 #+end_src
 ** Helm
 #+begin_src emacs-lisp
-  ;; TODO require 'make' sytem package
+  ;; TODO require 'make' system package
   (use-package helm
     :config
     (helm-mode)
@@ -233,7 +244,7 @@ TODO Когда запускается вместе с именем файла, 
   (use-package flycheck
     :ensure t)
 #+end_src
-** COMMENT Projectile
+** Projectile
 #+begin_src emacs-lisp
   (use-package projectile
     :ensure t)
@@ -243,7 +254,7 @@ TODO Когда запускается вместе с именем файла, 
   (use-package lsp-mode
 	       :ensure t)
 #+end_src
-** COMMENT Treemacs
+** Treemacs
 #+begin_src emacs-lisp
   (use-package treemacs
     :ensure t
@@ -406,6 +417,11 @@ TODO install rust packages
 ** Raku
 #+begin_src emacs-lisp
   (use-package raku-mode
+    :ensure t)
+#+end_src
+** Meson
+#+begin_src emacs-lisp
+  (use-package meson-mode
     :ensure t)
 #+end_src
 * Projects
