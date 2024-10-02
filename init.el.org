@@ -24,6 +24,13 @@
 *** realgud
 ** DONE Modify startup terminal launch
 * Variables
+** Predefined projeccts  dir
+#+begin_src emacs-lisp
+  ;; TODO defcustom
+  (defconst predefined-projects-dir-name "projects")
+  (defvar predefined-projects-dir
+    (file-name-concat user-emacs-directory predefined-projects-dir-name))
+#+end_src
 ** COMMENT Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
@@ -39,6 +46,28 @@
     )
 #+end_src
 ** TODO Function for check and install required system packages.
+** Import predefined projects
+#+begin_src emacs-lisp
+  ;; TODO interactive
+  (defun import-predefined-projects (&optional projects-dir)
+    (defvar pdir
+      (if projects-dir
+	  projects-dir
+	predefined-projects-dir
+	))
+
+    (defvar pf-list
+      (if file-exists-p pdir
+	(directory-files pdir t ".*\.project" t)   ;; TODO file extension -- defcustom
+	(progn
+	  (print "There is no predefined projects dirctory")
+	  nil)))
+
+    (dolist (fp pf-list)
+      (load-file fp)
+      )
+    )
+#+end_src
 * Install use-package
 ** (require 'package)
 #+begin_src emacs-lisp
@@ -96,54 +125,6 @@ TODO Когда запускается вместе с именем файла, 
 *** Disable num-5
 #+begin_src emacs-lisp
   (keymap-global-unset  "<kp-begin>")
-#+end_src
-** TODO COMMENT Project managment library
-*** TODO Compile projects files
-#+begin_src emacs-lisp
-  (defconst predefined-projects-dir-name "projects")
-
-  (defun create-project-instance project-file-name
-    ;; TODO
-    )
-
-  (defun temacs-load-predefined-projects ()
-    (defvar predefined-projects-dir
-      (file-name-concat user-emacs-directory predefined-projects-dir-name))
-    (unless file-exists-p predefined-projects-dir
-      (make-directory predefined-projects-dir))
-
-    (defvar predefined-projects
-      (iter-do 'project-file-name (directory-files predefined-projects-dir t ".*\.project" t)
-	       (create-project-instance project-file-name))))
-
-  (defun temacs-load-project project-path
-    ;; TODO
-    )
-
-#+end_src
-*** TODO Build project files queue
-*** TODO Open file callback function generator
-** TODO COMMENT Project managment library (rework)
-#+begin_src emacs-lisp
-  (defun turn-on-project (project-path)
-    "TODO"
-    )
-
-  (defun turn-off-project (project-path)
-    "TODO"
-    )
-
-  (defun switch-project (project-path)
-    "TODO"
-    )
-
-  (defun open-project (project-path)
-    "TODO"
-    )
-
-  (defun find-file-with-project (project-path file-path)
-    "TODO"
-    )
 #+end_src
 ** Term mode settings
 *** Bash as default shell
@@ -207,33 +188,6 @@ TODO Когда запускается вместе с именем файла, 
     :ensure t)
 #+end_src
 ** TODO Helm search
-** TODO Function for loading project related emacs-lisp code
-#+begin_src emacs-lisp
-  (defconst default_temacs_project_file_name "TemacsProject.org")
-
-  (defun find_temacs_project_dir_and_file (start_point_arg &optional temacs_project_file_name_arg)
-    (let*
-	(
-	 (temacs_project_file_name (or temacs_project_file_name_arg default_temacs_project_file_name))
-	 (start_point start_point_arg)
-	 (temacs_project_dir (locate-dominating-file start_point temacs_project_file_name))
-	 (temacs_project_file (file-name-concat temacs_project_dir temacs_project_file_name))
-	 )
-      (list temacs_project_dir temacs_project_file)
-      )
-    )
-
-  (defun load_temacs_project_file (temacs_project_file_path)
-    (org-babel-load-file temacs_project_file_path)
-    )
-
-  ;; TODO Project init functions list
-  ;; '(
-  ;;   find_and_load_temacs_project_file
-  ;;   basel project
-  ;;   project.el
-  ;;  )
-#+end_src
 ** Company
 #+begin_src emacs-lisp
   (use-package company
@@ -425,7 +379,10 @@ TODO install rust packages
     :ensure t)
 #+end_src
 * Projects
-** TODO Import file with projects
+** Import file with projects
+#+begin_src emacs-lisp
+  (import-predefined-projects)
+#+end_src
 * Debugging
 ** COMMENT 1
 #+begin_src emacs-lisp
