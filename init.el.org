@@ -58,13 +58,13 @@
 
     (defvar pf-list
       (if (file-exists-p pdir)
-	(directory-files pdir t ".*\.project" t)   ;; TODO file extension -- defcustom
+	(directory-files pdir t ".*\.org" t)   ;; TODO file extension -- defcustom
 	(progn
-	  (print "There is no predefined projects dirctory")
+	  (print "There is no predefined projects directory")
 	  nil)))
 
     (dolist (fp pf-list)
-      (load-file fp)
+      (org-babel-load-file fp)
       )
     )
 #+end_src
