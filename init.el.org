@@ -57,7 +57,7 @@
 	))
 
     (defvar pf-list
-      (if file-exists-p pdir
+      (if (file-exists-p pdir)
 	(directory-files pdir t ".*\.project" t)   ;; TODO file extension -- defcustom
 	(progn
 	  (print "There is no predefined projects dirctory")
