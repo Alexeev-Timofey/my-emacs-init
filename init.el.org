@@ -75,9 +75,13 @@
 #+begin_src emacs-lisp
   (package-initialize)
 #+end_src
-** Install use-package
+** COMMENT Install use-package
+Вроде, use-package уже стоит по дефолту
 #+begin_src emacs-lisp
   (package-install 'use-package t)
+#+end_src
+** (require 'use-package)
+#+begin_src emacs-lisp
   (require 'use-package)
 #+end_src
 * Features
