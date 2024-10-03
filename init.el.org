@@ -51,8 +51,8 @@
   (defun import-predefined-projects (&optional projects-dir)
     (interactive "DDirectory with project files: ")
     (let* (
-	   (pdir (if project-dir
-		     project-dir
+	   (pdir (if projects-dir
+		     projects-dir
 		   predefined-projects-dir))
 	   (pf-list (if (file-exists-p pdir)
 			(directory-files pdir t ".*\.org" t)   ;; TODO file extension -- defcustom
@@ -191,7 +191,7 @@ TODO Когда запускается вместе с именем файла, 
   (use-package company
     :ensure t)
 #+end_src
-** COMMENT Flycheck
+** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
     :ensure t)
@@ -218,7 +218,6 @@ TODO Когда запускается вместе с именем файла, 
     :ensure t
   )
 #+end_src
-** TODO Setup eglot for robotframework
 ** TODO Git
 ** TODO Natural Language Spelling
 ** COMMENT lsp-bridge
@@ -243,6 +242,7 @@ TODO Когда запускается вместе с именем файла, 
 #+end_src
 ** TODO sed script
 ** Emacs Lisp
+*** COMMENT Setup elisp-mode-hook
 #+begin_src emacs-lisp
   (defun my-elisp-hook ()
     (company-mode)
@@ -335,9 +335,9 @@ TODO install needed system packages
     (lsp-deferred)
     )
 
-  (add-hook 'python-mode-hook
-	    #'my-python-hook
-	    )
+  ;; (add-hook 'python-mode-hook
+  ;; 	  #'my-python-hook
+  ;; 	  )
 #+end_src
 ** TODO Robot Framework
 #+begin_src emacs-lisp
@@ -360,9 +360,9 @@ TODO install rust packages
     (eglot-ensure)
     )
 
-  (add-hook 'rust-mode-hook
-	    #'my-rust-hook
-	    )
+  ;; (add-hook 'rust-mode-hook
+  ;; 	  #'my-rust-hook
+  ;; 	  )
 
   ;; TODO Cargo.toml mode
 #+end_src
