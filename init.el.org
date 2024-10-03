@@ -48,25 +48,19 @@
 ** TODO Function for check and install required system packages.
 ** Import predefined projects
 #+begin_src emacs-lisp
-  ;; TODO interactive
   (defun import-predefined-projects (&optional projects-dir)
-    (defvar pdir
-      (if projects-dir
-	  projects-dir
-	predefined-projects-dir
-	))
-
-    (defvar pf-list
-      (if (file-exists-p pdir)
-	(directory-files pdir t ".*\.org" t)   ;; TODO file extension -- defcustom
-	(progn
-	  (print "There is no predefined projects directory")
-	  nil)))
-
-    (dolist (fp pf-list)
-      (org-babel-load-file fp)
-      )
-    )
+    (interactive "DDirectory with project files: ")
+    (let* (
+	   (pdir (if project-dir
+		     project-dir
+		   predefined-projects-dir))
+	   (pf-list (if (file-exists-p pdir)
+			(directory-files pdir t ".*\.org" t)   ;; TODO file extension -- defcustom
+		      (progn
+			(print "There is no predefined projects directory")
+			nil))))
+      (dolist (fp pf-list)
+	(org-babel-load-file fp))))
 #+end_src
 * Install use-package
 ** (require 'package)
