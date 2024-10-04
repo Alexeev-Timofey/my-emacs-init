@@ -1,28 +1,23 @@
 * ToDo list
 ** First Start
 ** TODO Tools for search and project managment
-** Auto install system dependencies
-** Emacs packages as system packages
 ** elgot vs lsp-mode vs lsp-bridge
-** DONE Function and variables
-** Python and RobotFramework
-*** Поиск и настройка проекта
-**** На каждый venv дошлжен быть собственный lsp-server
 ** Tools for VCS managment
 *** magit and forge
 *** lab.el for gitlab
 ** Natural Language Spelling
-** TODO Programming languages
+** Programming languages
 *** Elisp
-*** TODO Pyton
-**** Recognise project
-**** Setup environment
-**** Start lsp server
+*** Pyton
 *** Robotframework
 *** Rust
 ** Debugging
 *** realgud
-** DONE Modify startup terminal launch
+** TODO Package managment
+*** TODO quelpa
+*** TODO leaf
+*** TODO Emacs packages as system packages
+*** TODO Auto install system dependencies
 * Variables
 ** Predefined projeccts  dir
 #+begin_src emacs-lisp
