@@ -376,6 +376,11 @@ TODO install rust packages
   (use-package meson-mode
     :ensure t)
 #+end_src
+** netfilter script
+#+begin_src emacs-lisp
+  (use-package nftables-mode
+    :ensure t)
+#+end_src
 * Projects
 ** Import file with projects
 #+begin_src emacs-lisp
