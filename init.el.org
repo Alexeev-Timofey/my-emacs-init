@@ -235,16 +235,15 @@ TODO Когда запускается вместе с именем файла, 
   (use-package markdown-mode
     :ensure t)
 #+end_src
-** TODO sed script
 ** Emacs Lisp
-*** COMMENT Setup elisp-mode-hook
+*** Setup elisp-mode-hook
 #+begin_src emacs-lisp
   (defun my-elisp-hook ()
     (company-mode)
     )
   (add-hook 'elisp-mode-hook #'my-elisp-hook)
 #+end_src
-** TODO Python
+** TODO COMMENT Python
 *** Project navigation
 rg, projectile, treemacs (something else?)
 *** Linting
@@ -255,7 +254,7 @@ jedi | jedi-lsp | lsp-bridge
 ipdb | realgud
 *** Snippets
 yasnippet
-+*** Documentation
+*** Documentation
 jedi | jedi-lsp | lsp-bridge
 *** Profiling
 py-prof
@@ -343,7 +342,7 @@ TODO install needed system packages
   ;; TODO Setup eglot for robotframework
   ;; TODO Robotframework hook
 #+end_src
-** TODO Rust
+** TODO COMMENT Rust
 TODO install rust packages
 #+begin_src emacs-lisp
   (use-package rust-mode
