@@ -196,6 +196,11 @@ TODO Когда запускается вместе с именем файла, 
   (use-package projectile
     :ensure t)
 #+end_src
+** helm-projectile
+#+begin_src emacs-lisp
+  (use-package helm-projectile
+    :ensure t)
+#+end_src
 ** COMMENT lsp-mode
 #+begin_src emacs-lisp
   (use-package lsp-mode
@@ -206,6 +211,11 @@ TODO Когда запускается вместе с именем файла, 
   (use-package treemacs
     :ensure t
     )
+#+end_src
+** treemacs-projectile
+#+begin_src emacs-lisp
+  (use-package treemacs-projectile
+    :ensure t)
 #+end_src
 ** COMMENT lsp-treemacs
 #+begin_src emacs-lisp
@@ -342,21 +352,13 @@ TODO install needed system packages
   ;; TODO Setup eglot for robotframework
   ;; TODO Robotframework hook
 #+end_src
-** TODO COMMENT Rust
+** TODO Rust
 TODO install rust packages
 #+begin_src emacs-lisp
   (use-package rust-mode
     :ensure t)
-  (defun my-rust-hook ()
-    ;; (setq lsp-rust-server rust-analyzer)
-    ;; (lsp)
-    (company-mode)
-    (eglot-ensure)
-    )
-
-  ;; (add-hook 'rust-mode-hook
-  ;; 	  #'my-rust-hook
-  ;; 	  )
+  (use-package flycheck-rust
+    :ensure t)
 
   ;; TODO Cargo.toml mode
 #+end_src
