@@ -235,6 +235,18 @@ TODO Когда запускается вместе с именем файла, 
   (use-package realgud
     :ensure t)
 #+end_src
+** tree-sitter
+#+begin_src emacs-lisp
+  (use-package tree-sitter
+    :esure t
+    )
+  (use-package tree-sitter-langs
+    :esure t
+    )
+  (use-package treesit-auto
+    :esure t
+    )
+#+end_src
 ** YAML
 #+begin_src emacs-lisp
   (use-package yaml-mode
@@ -251,7 +263,11 @@ TODO Когда запускается вместе с именем файла, 
   (defun my-elisp-hook ()
     (company-mode)
     )
+  (defun my-lisp-data-hook ()
+    (company-mode)
+    )
   (add-hook 'elisp-mode-hook #'my-elisp-hook)
+  (add-hook 'lisp-data-mode-hook #'my-lisp-data-hook)
 #+end_src
 ** TODO COMMENT Python
 *** Project navigation
