@@ -18,6 +18,8 @@
 *** TODO leaf
 *** TODO Emacs packages as system packages
 *** TODO Auto install system dependencies
+** Treesitter
+** Fix warnings
 * Variables
 ** Predefined projeccts  dir
 #+begin_src emacs-lisp
@@ -235,16 +237,24 @@ TODO Когда запускается вместе с именем файла, 
   (use-package realgud
     :ensure t)
 #+end_src
-** tree-sitter
+** TODO COMMENT tree-sitter
 #+begin_src emacs-lisp
   (use-package tree-sitter
-    :esure t
+    :ensure t
     )
   (use-package tree-sitter-langs
-    :esure t
+    :ensure t
     )
   (use-package treesit-auto
-    :esure t
+    :ensure t
+    )
+#+end_src
+** Common for program languages
+#+begin_src emacs-lisp
+  (defun start-eglot-company-flycheck ()
+    (eglot-ensure)
+    (company-mode)
+    (flycheck-mode)
     )
 #+end_src
 ** YAML
