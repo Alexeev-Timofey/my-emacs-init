@@ -21,7 +21,7 @@
 ** Treesitter
 ** Fix warnings
 * Variables
-** Predefined projeccts  dir
+** Predefined projects  dir
 #+begin_src emacs-lisp
   ;; TODO defcustom
   (defconst predefined-projects-dir-name "projects")
@@ -254,8 +254,7 @@ TODO Когда запускается вместе с именем файла, 
   (defun start-eglot-company-flycheck ()
     (eglot-ensure)
     (company-mode)
-    (flycheck-mode)
-    )
+    (flycheck-mode))
 #+end_src
 ** YAML
 #+begin_src emacs-lisp

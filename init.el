@@ -8,7 +8,11 @@
  '(package-selected-packages
    '(nftables-mode yaml-mode use-package rust-mode robot-mode raku-mode projectile helm flycheck cyberpunk-theme company))
  '(safe-local-variable-values
-   '((eval progn
+   '((eval start-eglot-company-flycheck-if-projectile)
+     (eval 'start-eglot-company-flycheck-if-projectile)
+     (eval start-eglot-company-flycheck)
+     (eval function start-eglot-company-flycheck)
+     (eval progn
 	   (eglot-ensure)
 	   (company-mode)
 	   (flycheck-mode))
