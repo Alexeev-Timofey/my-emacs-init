@@ -176,7 +176,7 @@ TODO Когда запускается вместе с именем файла, 
     :ensure t
     )
 #+end_src
-** COMMENT Helm descbinds
+** Helm descbinds
 #+begin_src emacs-lisp
   (use-package helm-descbinds
     :config (helm-descbinds-mode)
