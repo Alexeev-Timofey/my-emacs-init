@@ -377,6 +377,7 @@ TODO install needed system packages
   ;; TODO Setup eglot for robotframework
   ;; TODO Robotframework hook
 #+end_src
+** TODO Django
 ** TODO Rust
 TODO install rust packages
 #+begin_src emacs-lisp
