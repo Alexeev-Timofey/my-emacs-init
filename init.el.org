@@ -197,6 +197,7 @@ TODO Когда запускается вместе с именем файла, 
 #+begin_src emacs-lisp
   (use-package projectile
     :bind-keymap ("C-p" . projectile-command-map)
+    :bind (:map term-raw-map ("C-c P" . projectile-command-map))
     :ensure t)
 #+end_src
 ** helm-projectile
