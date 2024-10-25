@@ -254,6 +254,7 @@ TODO Когда запускается вместе с именем файла, 
 ** Common for program languages
 #+begin_src emacs-lisp
   (defun start-eglot-company-flycheck ()
+    (interactive)
     (eglot-ensure)
     (company-mode)
     (flycheck-mode))
