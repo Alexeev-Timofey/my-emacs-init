@@ -28,7 +28,7 @@
   (defvar predefined-projects-dir
     (file-name-concat user-emacs-directory predefined-projects-dir-name))
 #+end_src
-** COMMENT Debug
+** Debug
 #+begin_src emacs-lisp
   (setq debug-on-error t)
 #+end_src
@@ -182,6 +182,11 @@ TODO Когда запускается вместе с именем файла, 
     :config (helm-descbinds-mode)
     :ensure t)
 #+end_src
+** Unicode
+#+begin_src emacs-lisp
+  (use-package list-unicode-display
+    :ensure t)
+#+end_src
 ** TODO Helm search
 ** Company
 #+begin_src emacs-lisp
@@ -265,6 +270,9 @@ TODO Когда запускается вместе с именем файла, 
     :ensure t)
 #+end_src
 ** Markdown
+*** Dependency
+markdown command
+*** Code
 #+begin_src emacs-lisp
   (use-package markdown-mode
     :ensure t)
