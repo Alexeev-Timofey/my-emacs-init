@@ -308,7 +308,7 @@ py-prof
 venv, pyenv, pipenv
 *** Dependensies
 pipenv, some python lsp server (pylsp)
-*** eLisp code
+*** COMMENT eLisp code (DELETEME)
 TODO install needed system packages
 #+begin_src emacs-lisp
   (defun my-python-hook ()
@@ -378,6 +378,18 @@ TODO install needed system packages
   ;; (add-hook 'python-mode-hook
   ;; 	  #'my-python-hook
   ;; 	  )
+#+end_src
+*** COMMENT eLisp code
+#+begin_src emacs-lisp
+  ;; (defvar python-default-settings ()) ;; TODO
+  (defvar python-default-pylsp-config ()) ;; TODO
+
+  (defun python-default-setup ()
+    (eglot-ensure)
+    (company-mode))
+
+  (defun python-default-setup-hook ()
+    (add-hook 'projectile-find-file-hook #'default-python-setup 0 t))
 #+end_src
 ** TODO Robot Framework
 #+begin_src emacs-lisp
