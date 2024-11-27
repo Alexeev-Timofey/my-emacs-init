@@ -289,7 +289,7 @@ markdown command
   (add-hook 'elisp-mode-hook #'my-elisp-hook)
   (add-hook 'lisp-data-mode-hook #'my-lisp-data-hook)
 #+end_src
-** TODO COMMENT Python
+** TODO Python
 *** Project navigation
 rg, projectile, treemacs (something else?)
 *** Linting
@@ -379,7 +379,7 @@ TODO install needed system packages
   ;; 	  #'my-python-hook
   ;; 	  )
 #+end_src
-*** COMMENT eLisp code
+*** eLisp code
 #+begin_src emacs-lisp
   ;; (defvar python-default-settings ()) ;; TODO
   (defvar python-default-pylsp-config ()) ;; TODO

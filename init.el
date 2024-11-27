@@ -5,9 +5,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(list-unicode-display charmap yaml-mode treesit-auto treemacs-projectile tree-sitter-langs rust-mode robot-mode raku-mode nftables-mode meson-mode markdown-mode helm-projectile helm-descbinds flycheck-rust cyberpunk-theme company))
+   '(charmap yaml-mode treesit-auto treemacs-projectile tree-sitter-langs rust-mode robot-mode raku-mode nftables-mode meson-mode markdown-mode helm-projectile helm-descbinds flycheck-rust cyberpunk-theme company))
  '(safe-local-variable-values
-   '((eval print "Welcome to Corolla!")
+   '((nil)
+     (eval print "Welcome to Corolla!")
      (eval add-hook 'projectile-find-file-hook #'dpi-autotests-python-setup 0 t)
      (eval add-hook 'projectile-find-file-hook #'start-eglot-company-flycheck 0 t))))
 (custom-set-faces
