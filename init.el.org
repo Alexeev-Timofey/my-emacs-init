@@ -385,6 +385,7 @@ TODO install needed system packages
   (defvar python-default-pylsp-config ()) ;; TODO
 
   (defun python-default-setup ()
+    (electric-pair-local-mode)
     (eglot-ensure)
     (company-mode))
 
