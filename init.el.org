@@ -20,6 +20,8 @@
 *** TODO Auto install system dependencies
 ** Treesitter
 ** Fix warnings
+** AI code completition
+*** minuet
 * Variables
 ** Predefined projects  dir
 #+begin_src emacs-lisp
@@ -256,6 +258,7 @@ TODO Когда запускается вместе с именем файла, 
     :ensure t
     )
 #+end_src
+** TODO asdf support
 ** Common for program languages
 #+begin_src emacs-lisp
   (defun start-eglot-company-flycheck ()
@@ -381,16 +384,35 @@ TODO install needed system packages
 #+end_src
 *** eLisp code
 #+begin_src emacs-lisp
-  ;; (defvar python-default-settings ()) ;; TODO
-  (defvar python-default-pylsp-config ()) ;; TODO
+  (defvar python-default-venv-config ()) ;; TODO
+  (defun python-default-venv-setup (&optional venv-config)) ;; TODO
 
+  (defvar python-use-pipenv nil)
+  (defvar python-default-pipenv-config ()) ;; TODO
+  (defun python-default-pipenv-setup (&optional pipenv-config)
+    (let* ((config (if pipenv-config
+		       pipenv-config
+		     python-default-pipenv-config))
+	   (pipfile-location (plist-get :pipfile-location)))
+      (when pipfile-location
+	(setenv "PIPENV_PIPFILE" pipfile-location))
+      (setq python-use-pipenv t)))
+
+  (defvar python-default-pylsp-config ()) ;; TODO
+  (defun python-setup-pylsp (&optional pylsp-config)) ;; TODO
+
+  (defun python-default-check-dependencies()) ;; TODO
+
+  (defun python-pipenv-get-venv ()) ;; TODO
+
+  (defvar python-default-config ()) ;; TODO
   (defun python-default-setup ()
     (electric-pair-local-mode)
     (eglot-ensure)
     (company-mode))
 
   (defun python-default-setup-hook ()
-    (add-hook 'projectile-find-file-hook #'default-python-setup 0 t))
+    (add-hook 'projectile-find-file-hook #'python-default-setup 0 t))
 #+end_src
 ** TODO Robot Framework
 #+begin_src emacs-lisp
